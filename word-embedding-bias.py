@@ -32,20 +32,19 @@ output_glove = """# Glove output for Gender bias:
 | input | manager |executive |doctor | lawyer | programmer | scientist| soldier |
 supervisor | rancher| janitor| firefighter | officer|
 """
-# Create a dictionary to store cosine similarity values for each target
-word
+# Create a dictionary to store cosine similarity values for each target word
 target_columns = {target: [] for target in test_terms}
 for result in results_glove:
     input_word = result['input']
-for target in test_terms:
-    if target == result['target']:
-        target_columns[target].append(round(result['cosine'],
+    for target in test_terms:
+        if target == result['target']:
+            target_columns[target].append(round(result['cosine'],
 5))
 # Populate the output_glove with the values from the dictionary
 for input_word in definite_sets[0]:
     row = f"{input_word}"
-for target in test_terms:
-    row += f"{target_columns[target].pop(0)}|"
-    output_glove += row + "\n"
+    for target in test_terms:
+        row += f"{target_columns[target].pop(0)}|"
+        output_glove += row + "\n"
 # Display the table
 display (Markdown(output_glove))
